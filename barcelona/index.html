@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FC Barcelona – Strona Główna</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    /* ===== ZMIENNE GLOBALNE ===== */
+    :root {
+      --blau:   #004D98;
+      --grana:  #A50044;
+      --gold:   #EDBB00;
+      --dark:   #0a0a12;
+      --darker: #06060e;
+      --light:  #f0e8d8;
+      --muted:  #9a8f7e;
+      --card-bg: rgba(255,255,255,0.04);
+      --border:  rgba(164,0,68,0.35);
+      --border-blue: rgba(0,77,152,0.4);
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body:    'Barlow', sans-serif;
+      --nav-h: 70px;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--darker);
+      color: var(--light);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ===== PASEK GÓRNY ===== */
+    .topbar {
+      background: var(--grana);
+      text-align: center;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      padding: 6px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    /* ===== NAWIGACJA ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: rgba(10,10,18,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--grana);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      gap: 1rem;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      letter-spacing: .06em;
+      color: var(--gold);
+    }
+    .nav-logo img {
+      height: 44px;
+      width: 44px;
+      object-fit: contain;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: .2rem;
+    }
+    .nav-links a {
+      display: block;
+      padding: .45rem 1rem;
+      font-family: var(--font-display);
+      font-size: .95rem;
+      letter-spacing: .08em;
+      color: var(--light);
+      border-radius: 4px;
+      transition: background .2s, color .2s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: var(--grana);
+      color: #fff;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      height: 92vh;
+      min-height: 540px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #001730 0%, #1a0010 100%);
+    }
+    /* Placeholder dla zdjęcia stadionu w tle – zastąp własnym */
+    .hero-bg-img {
+      position: absolute; inset: 0;
+      background: url('zdjecie_stadion.png') center/cover no-repeat;
+      opacity: .28;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(6,6,14,1) 0%, rgba(6,6,14,.3) 60%, transparent 100%);
+    }
+    .hero-stripe {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 6px;
+      left: 7%;
+      background: linear-gradient(to bottom, var(--blau), var(--grana));
+      opacity: .5;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 3rem 4rem 4rem;
+      max-width: 750px;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-display);
+      font-size: .9rem;
+      letter-spacing: .25em;
+      color: var(--gold);
+      margin-bottom: .5rem;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      line-height: .95;
+      letter-spacing: .02em;
+      color: #fff;
+    }
+    .hero-title span { color: var(--gold); }
+    .hero-sub {
+      margin-top: 1.2rem;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: rgba(240,232,216,.7);
+      max-width: 440px;
+    }
+    .hero-badges {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .badge {
+      background: rgba(255,255,255,.07);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: .4rem 1rem;
+      font-family: var(--font-display);
+      font-size: .85rem;
+      letter-spacing: .1em;
+      color: var(--gold);
+    }
+
+    /* ===== GŁÓWNA SIATKA ===== */
+    .main-grid {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    @media (max-width: 900px) {
+      .main-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===== KARTY ===== */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform .25s, border-color .25s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--grana);
+    }
+    .card-header {
+      background: linear-gradient(90deg, var(--blau), var(--grana));
+      padding: .7rem 1.4rem;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: .12em;
+    }
+    .card-body { padding: 1.4rem; }
+    .info-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      padding: .55rem 0;
+      font-size: .92rem;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-label {
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: .78rem;
+      letter-spacing: .08em;
+    }
+    .info-value {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ===== STROJE ===== */
+    .kits-section {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      letter-spacing: .1em;
+      border-left: 5px solid var(--grana);
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .kits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    @media (max-width: 700px) {
+      .kits-grid { grid-template-columns: 1fr; }
+    }
+    .kit-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-blue);
+      border-radius: 8px;
+      overflow: hidden;
+      text-align: center;
+      transition: transform .25s, border-color .25s;
+    }
+    .kit-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--blau);
+    }
+    .kit-label {
+      background: var(--blau);
+      font-family: var(--font-display);
+      letter-spacing: .12em;
+      padding: .5rem;
+      font-size: .95rem;
+    }
+    .kit-img {
+      padding: 1.5rem;
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,.03);
+    }
+    .kit-img img {
+      max-height: 170px;
+      object-fit: contain;
+      margin: auto;
+    }
+    .kit-placeholder {
+      font-size: .8rem;
+      color: var(--muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    /* ===== UEFA RANKING ===== */
+    .ranking-banner {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+    .ranking-box {
+      background: linear-gradient(90deg, var(--grana) 0%, var(--blau) 100%);
+      border-radius: 8px;
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .ranking-label {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: .15em;
+    }
+    .ranking-value {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    /* ===== HISTORIA ===== */
+    .historia {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem 5rem;
+    }
+    .historia-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    @media (max-width: 900px) {
+      .historia-grid { grid-template-columns: 1fr; }
+    }
+    .historia-text {
+      font-size: .97rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(240,232,216,.82);
+    }
+    .historia-text p { margin-bottom: 1rem; }
+    .historia-img {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      min-height: 300px;
+      background: rgba(255,255,255,.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .82rem;
+      letter-spacing: .06em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .historia-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .timeline {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: .9rem;
+    }
+    .tl-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+    .tl-year {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: var(--gold);
+      letter-spacing: .06em;
+      text-align: right;
+      padding-top: .15rem;
+    }
+    .tl-desc {
+      font-size: .9rem;
+      color: rgba(240,232,216,.75);
+      border-left: 2px solid var(--grana);
+      padding-left: .8rem;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--dark);
+      border-top: 2px solid var(--grana);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: .8rem;
+      color: var(--muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    footer span { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">Mes que un club - Wiecej niz klub - Since 1899</div>
+
+  <nav>
+    <div class="nav-logo">
+      <!-- ZDJĘCIE 1: herb klubu, np. herb.png -->
+      <img src="zdjecie_herb.png" alt="FCB Herb" onerror="this.style.display='none'"/>
+      FC BARCELONA
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Strona Główna</a></li>
+      <li><a href="gablota_pucharow.php">Gablota Pucharów</a></li>
+      <li><a href="sklad.php">Skład</a></li>
+      <li><a href="statystyki.php">Statystyki Sezonowe</a></li>
+      <li><a href="sezony.php">Sezony</a></li>
+      <li><a href="byli_zawodnicy.php">Baza Byłych Zawodników</a></li>
+      <li><a href="akademia.php">Akademia</a></li>
+      <li><a href="trener.php">Gabinet Trenera</a></li>
+      <li><a href="logout.php">Wyloguj</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <!-- ZDJĘCIE 2: stadion w tle bohatera, np. stadion_bg.jpg -->
+    <div class="hero-bg-img" style="background-image: url('zdjecie_stadion.png');"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-stripe"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Futbol Club Barcelona · Est. 1899</p>
+      <h1 class="hero-title">FC<br/><span>BARCE</span><br/>LONA</h1>
+      <p class="hero-sub">Més que un club. Klub założony przez Joana Gamper w Barcelonie, symbol Katalonii i światowa potęga piłkarska.</p>
+    </div>
+  </section>
+
+  <!-- INFORMACJE O KLUBIE + STADIONIE -->
+  <section class="main-grid">
+
+    <div class="card">
+      <div class="card-header">Informacje o Klubie</div>
+      <div class="card-body">
+        <div class="info-row">
+          <span class="info-label">Pełna Nazwa</span>
+          <span class="info-value">Futbol Club Barcelona</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Przydomek</span>
+          <span class="info-value">Blaugrana</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Data Powstania</span>
+          <span class="info-value">1899</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Właściciel</span>
+          <span class="info-value">Socios</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Miasto</span>
+          <span class="info-value">Barcelona</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Informacje o Stadionie</div>
+      <div class="card-body">
+        <div class="info-row">
+          <span class="info-label">Nazwa Stadionu</span>
+          <span class="info-value">Spotify Camp Nou</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Inna Nazwa</span>
+          <span class="info-value">Nie posiada</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Nazwa UEFA</span>
+          <span class="info-value">Camp Nou</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Pojemność</span>
+          <span class="info-value">105 000</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Otwarcie</span>
+          <span class="info-value">1957</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Kraj</span>
+          <span class="info-value">Hiszpania</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ZDJĘCIE STADIONU -->
+  <section style="max-width:1300px;margin:0 auto;padding:0 2rem 4rem;">
+    <div class="section-title">Stadion</div>
+    <div style="border-radius:8px;overflow:hidden;border:1px solid var(--border);background:rgba(255,255,255,.04);min-height:300px;display:flex;align-items:center;justify-content:center;">
+      <!-- ZDJĘCIE 3: zdjęcie stadionu, np. stadion.jpg -->
+      <img src="zdjecie_stadion.png" alt="Spotify Camp Nou" style="width:100%;object-fit:cover;max-height:420px;" onerror="this.outerHTML='<span style=\'color:var(--muted);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;\'>Zdjęcie 3 – Stadion Camp Nou</span>'"/>
+    </div>
+  </section>
+
+  <!-- STROJE -->
+  <section class="kits-section">
+    <div class="section-title">Stroje</div>
+    <div class="kits-grid">
+
+      <div class="kit-card">
+        <div class="kit-label">Domowy</div>
+        <div class="kit-img">
+          <!-- ZDJĘCIE 4: strój domowy -->
+          <img src="zdjecie_stroj_domowy.png" alt="Strój domowy" onerror="this.outerHTML='<span class=\'kit-placeholder\'>Zdjęcie 4 – Strój Domowy</span>'"/>
+        </div>
+      </div>
+
+      <div class="kit-card">
+        <div class="kit-label">Wyjazdowy</div>
+        <div class="kit-img">
+          <!-- ZDJĘCIE 5: strój wyjazdowy -->
+          <img src="zdjecie_stroj_wyjazdowy.png" alt="Strój wyjazdowy" onerror="this.outerHTML='<span class=\'kit-placeholder\'>Zdjęcie 5 – Strój Wyjazdowy</span>'"/>
+        </div>
+      </div>
+
+      <div class="kit-card">
+        <div class="kit-label">Alternatywny</div>
+        <div class="kit-img">
+          <!-- ZDJĘCIE 6: strój alternatywny -->
+          <img src="zdjecie_stroj_alternatywny.png" alt="Strój alternatywny" onerror="this.outerHTML='<span class=\'kit-placeholder\'>Zdjęcie 6 – Strój Alternatywny</span>'"/>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- UEFA RANKING -->
+  <section class="ranking-banner">
+    <div class="ranking-box">
+      <span class="ranking-label">UEFA Ranking Klubów</span>
+      <span class="ranking-value">7</span>
+      <span class="ranking-label">miejsce</span>
+    </div>
+  </section>
+
+  <!-- HISTORIA KLUBU -->
+  <section class="historia">
+    <div class="section-title">Historia Klubu</div>
+    <div class="historia-grid">
+
+      <div>
+        <div class="historia-text">
+          <p>FC Barcelona zostało założone <strong>29 listopada 1899 roku</strong> przez grupę entuzjastów piłki nożnej pod przywództwem szwajcarskiego biznesmena Joana Gamper. Klub szybko stał się symbolem katalońskiej tożsamości i oporu kulturowego.</p>
+          <p>W pierwszych dekadach XX wieku klub rozwijał się, zdobywając kolejne trofea na arenie krajowej. <strong>Camp Nou</strong>, otwarte w 1957 roku, stało się jednym z największych stadionów świata z pojemnością ponad 105 000 kibiców.</p>
+          <p>Lata 70. i 80. to era wielkich piłkarzy takich jak Johan Cruyff, który najpierw jako zawodnik, a potem trener zmienił oblicze klubu, wprowadzając filozofię tiki-taki i totaalvoetbal.</p>
+          <p>Złota era nastała za sprawą Pepa Guardioli (2008–2012), kiedy drużyna wygrała dwa razy Ligę Mistrzów i zdobywała niemal wszystkie możliwe trofea. Messi, Xavi, Iniesta – ta drużyna weszła do historii futbolu.</p>
+        </div>
+      </div>
+
+      <div class="historia-img">
+        <!-- ZDJĘCIE 7: zdjęcie historyczne klubu -->
+        <img src="zdjecie_historia.jpg" alt="Historia FC Barcelona" onerror="this.outerHTML='<span style=\'color:var(--muted);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;\'>Zdjęcie 7 – Zdjęcie Historyczne</span>'"/>
+      </div>
+
+    </div>
+
+    <!-- OŚ CZASU -->
+    <div class="section-title" style="margin-top:3rem;">Oś Czasu</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-year">1899</span>
+        <span class="tl-desc">Założenie klubu przez Joana Gamper w Barcelonie.</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">1928</span>
+        <span class="tl-desc">Pierwszy mistrz La Liga po inauguracji rozgrywek.</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">1957</span>
+        <span class="tl-desc">Otwarcie Camp Nou – największego stadionu w Europie.</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">1973</span>
+        <span class="tl-desc">Johan Cruyff dołącza do Barcelony – rewolucja taktyczna.</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">1992</span>
+        <span class="tl-desc">Pierwsze Puchar Europy / Liga Mistrzów w historii klubu.</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">2009</span>
+        <span class="tl-desc">Historyczne Sextuple pod wodzą Guardioli i z Messim.</span>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">2023</span>
+        <span class="tl-desc">Mistrzostwo La Liga i rozpoczęcie przebudowy Camp Nou.</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 <span>FC Barcelona</span> · Witryna stworzona na potrzeby projektu FIFA Kariera · Wszelkie prawa zastrzeżone WIKTOR HUTNIK
+  </footer>
+
+</body>
+</html>
